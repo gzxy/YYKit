@@ -1311,4 +1311,9 @@ static dispatch_queue_t YYLabelGetReleaseQueue() {
     }
 }
 
+- (BOOL)trackingTouch
+{
+    return _state.trackingTouch;
+}
+
 @end

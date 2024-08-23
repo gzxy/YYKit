@@ -30,4 +30,13 @@ YYSYNTH_DUMMY_CLASS(UITextField_YYAdd)
     [self setSelectedTextRange:selectionRange];
 }
 
+/// 获得光标位置
+- (NSRange)selectedRange {
+    UITextRange *textRange = [self selectedTextRange];
+    NSInteger location = [self offsetFromPosition:self.beginningOfDocument toPosition:textRange.start];
+//    NSInteger lenth = [self offsetFromPosition:self.beginningOfDocument toPosition:textRange.end];
+    NSRange range = NSMakeRange(location, 0);
+    return range;
+}
+
 @end

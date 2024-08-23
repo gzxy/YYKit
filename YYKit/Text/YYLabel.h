@@ -329,6 +329,9 @@ NS_ASSUME_NONNULL_BEGIN
  
  */
 
+// YYKit Custom Added by zhudongfang
+@property (nonatomic, assign) BOOL trackingTouch;
+
 @end
 
 

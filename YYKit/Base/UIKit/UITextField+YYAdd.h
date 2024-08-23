@@ -30,6 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setSelectedRange:(NSRange)range;
 
+/// YYKit Custom  获得光标位置
+- (NSRange)selectedRange;
+
 @end
 
 NS_ASSUME_NONNULL_END
