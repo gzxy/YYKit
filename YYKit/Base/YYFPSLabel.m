@@ -7,7 +7,7 @@
 //
 
 #import "YYFPSLabel.h"
-#import "YYKit.h"
+#import "NSAttributedString+YYText.h"
 #import <mach/mach.h>
 
 #define kSize CGSizeMake(150, 40)
