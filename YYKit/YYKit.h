@@ -95,6 +95,7 @@ FOUNDATION_EXPORT const unsigned char YYKitVersionString[];
 #import <YYKit/YYReachability.h>
 #import <YYKit/YYGestureRecognizer.h>
 #import <YYKit/YYFileHash.h>
+#import <YYKit/YYFPSLabel.h>
 #import <YYKit/YYKeychain.h>
 #import <YYKit/YYWeakProxy.h>
 #import <YYKit/YYTimer.h>
@@ -186,6 +187,7 @@ FOUNDATION_EXPORT const unsigned char YYKitVersionString[];
 #import "YYReachability.h"
 #import "YYGestureRecognizer.h"
 #import "YYFileHash.h"
+#import "YYFPSLabel.h"
 #import "YYKeychain.h"
 #import "YYWeakProxy.h"
 #import "YYTimer.h"
