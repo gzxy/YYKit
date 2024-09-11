@@ -21,7 +21,7 @@ YYSYNTH_DUMMY_CLASS(UIView_YYAdd)
 - (UIImage *)snapshotImage {
     UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
     format.opaque = self.opaque;
-    format.scale = 0;
+    format.scale = UIScreen.mainScreen.scale;
     
     UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.bounds.size format:format];
     UIImage *snap = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
@@ -29,10 +29,7 @@ YYSYNTH_DUMMY_CLASS(UIView_YYAdd)
         [self.layer renderInContext:context];
     }];
     
-//    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
-//    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    UIImage *snap = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
+
     return snap;
 }
 
@@ -42,20 +39,32 @@ YYSYNTH_DUMMY_CLASS(UIView_YYAdd)
     }
     UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
     format.opaque = self.opaque;
-    format.scale = 0;
+    format.scale = UIScreen.mainScreen.scale;
     
     UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.bounds.size format:format];
     UIImage *snap = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
         [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:afterUpdates];
     }];
-    
-//    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
-//    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:afterUpdates];
-//    UIImage *snap = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
+
     return snap;
 }
+- (UIImage *)imageFromView:(UIView *)theView atFrame:(CGRect)atFrame
+{
+    UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+    format.opaque = NO;
+    format.scale = UIScreen.mainScreen.scale;
+    
+    UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:theView.frame.size format:format];
+    UIImage *theImage = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+        CGContextRef context = rendererContext.CGContext;
+        CGContextSaveGState(context);
+        UIRectClip(atFrame);
+        [theView.layer renderInContext:context];
+    }];
+    
 
+    return  theImage;
+}
 - (NSData *)snapshotPDF {
     CGRect bounds = self.bounds;
     NSMutableData *data = [NSMutableData data];
@@ -83,7 +92,6 @@ YYSYNTH_DUMMY_CLASS(UIView_YYAdd)
 }
 
 - (void)removeAllSubviews {
-    //[self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     while (self.subviews.count) {
         [self.subviews.lastObject removeFromSuperview];
     }

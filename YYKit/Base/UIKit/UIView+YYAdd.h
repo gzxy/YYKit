@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable UIImage *)snapshotImageAfterScreenUpdates:(BOOL)afterUpdates;
 
+- (UIImage *)imageFromView:(UIView *)theView atFrame:(CGRect)atFrame;
+
 /**
  Create a snapshot PDF of the complete view hierarchy.
  */
